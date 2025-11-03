@@ -36,14 +36,14 @@ class AuthController extends Controller
             $failedRules = $validator->failed();
 
             if (isset($failedRules['email']) && isset($failedRules['email']['Unique'])) {
-                return redirect(route('signUp'))->with(['message' => ['secondary', 'Email sudah terdaftar.']]);
+                return redirect(route('auth.signUp'))->with(['message' => ['secondary', 'Email sudah terdaftar.']]);
             }
 
             if (isset($failedRules['store_name']) && isset($failedRules['store_name']['Unique'])) {
-                return redirect(route('signUp'))->with(['message' => ['secondary', 'Nama toko sudah terdaftar.']]);
+                return redirect(route('auth.signUp'))->with(['message' => ['secondary', 'Nama toko sudah terdaftar.']]);
             }
 
-            return redirect(route('signUp'))->with(['message' => ['secondary', 'Periksa kembali data yang Anda masukkan.']]);
+            return redirect(route('auth.signUp'))->with(['message' => ['secondary', 'Periksa kembali data yang Anda masukkan.']]);
         }
 
         if ($request->role === 'buyer') {
@@ -56,27 +56,27 @@ class AuthController extends Controller
 
             $token = $user->createToken('auth_token')->plainTextToken;
 
-            return redirect(route('dashboard'));
+            return redirect(route('auth.signIn'))->with(['message' => ['success', 'Pendaftaran akun berhasil. Silakan login.']]);
         } elseif ($request->role === 'seller') {
-            if (!isset($request->store_name)) {
-                return redirect(route('signUp'))->with(['message' => ['secondary', 'Nama toko wajib diisi untuk pendaftaran sebagai penjual.']]);
-            } else {
-                $user = User::create([
-                    'name' => $request->name,
-                    'email' => $request->email,
-                    'password' => Hash::make($request->password),
-                    'role' => 'seller',
-                ]);
-
-                Store::create([
-                    'user_id' => $user->id,
-                    'store_name' => $request->store_name,
-                ]);
-
-                $token = $user->createToken('auth_token')->plainTextToken;
-
-                return redirect(route('dashboard'));
+            if (! isset($request->store_name)) {
+                return redirect(route('auth.signUp'))->with(['message' => ['secondary', 'Nama toko wajib diisi untuk pendaftaran sebagai penjual.']]);
             }
+
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => 'seller',
+            ]);
+
+            Store::create([
+                'user_id' => $user->id,
+                'store_name' => $request->store_name,
+            ]);
+
+            $token = $user->createToken('auth_token')->plainTextToken;
+
+            return redirect(route('auth.signIn'))->with(['message' => ['success', 'Pendaftaran akun berhasil. Silakan login.']]);
         }
     }
 
@@ -88,18 +88,18 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect(route('signIn'))->with(['message' => ['warning', $validator->errors()]]);
+            return redirect(route('auth.signIn'))->with(['message' => ['warning', $validator->errors()]]);
         }
 
         if (! Auth::attempt($request->only('email', 'password'))) {
-            return redirect(route('signIn'))->with(['message' => ['danger', 'Email atau password salah']]);
+            return redirect(route('auth.signIn'))->with(['message' => ['danger', 'Email atau password salah']]);
         }
 
         $user = User::where('email', $request->email)->firstOrFail();
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        return redirect(route('dashboard'));
+        return redirect(route('dashboard.index'));
     }
 
     public function me(Request $request)
@@ -121,6 +121,6 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('signIn')->with(['message' => ['success', 'Logout berhasil']]);
+        return redirect()->route('auth.signIn')->with(['message' => ['success', 'Logout berhasil']]);
     }
 }

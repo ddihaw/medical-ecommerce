@@ -109,7 +109,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <form role="form" class="user" method="POST" action="{{ route('register') }}">
+                            <form role="form" class="user" method="POST" action="{{ route('auth.register') }}">
                                 @csrf
                                 <div class="mb-3">
                                     <input type="text" class="form-control" name="name" placeholder="Name"
@@ -149,7 +149,7 @@
                                     <button type="submit" id="submitButton" class="btn bg-gradient-dark w-100 my-4 mb-2"
                                         disabled>Sign up</button>
                                 </div>
-                                <p class="text-sm mt-3 mb-0">Already have an account? <a href="{{ route('signIn') }}"
+                                <p class="text-sm mt-3 mb-0">Already have an account? <a href="{{ route('auth.signIn') }}"
                                         class="text-dark font-weight-bolder">Sign in</a></p>
                             </form>
                         </div>

@@ -41,7 +41,7 @@
                   <p class="mb-0">Enter your email and password to sign in</p>
                 </div>
                 <div class="card-body">
-                  <form class="user" method="POST" action="{{ route('login') }}">
+                  <form class="user" method="POST" action="{{ route('auth.login') }}">
                     @csrf
                     <div class="mb-3">
                       <input type="email" name="email" class="form-control form-control-lg" placeholder="Email"
@@ -63,7 +63,7 @@
                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
                   <p class="mb-4 text-sm mx-auto">
                     Don't have an account?
-                    <a href="{{ route('signUp') }}" class="text-primary text-gradient font-weight-bold">Sign up</a>
+                    <a href="{{ route('auth.signUp') }}" class="text-primary text-gradient font-weight-bold">Sign up</a>
                   </p>
                 </div>
               </div>
