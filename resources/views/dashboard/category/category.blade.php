@@ -2,60 +2,49 @@
 @section('content')
     <div class="row">
         <div class="col-12">
+            @if (session()->has('message'))
+                <div class="alert alert-{{ session('message')[0] }} alert-dismissible fade show" role="alert">
+                    <span class="alert-text text-white"><strong>{{ session('message')[1] }}</strong></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
             <div class="card mb-4">
-                <div class="card-header pb-0">
-                    <h6>Daftar Kategori</h6>
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h6 class="mb-0">Daftar Kategori</h6>
+                    <div>
+                        <a href="{{ route('categories.new') }}" class="btn btn-sm btn-primary me-2">
+                            <i class="fa fa-plus"></i> Tambah
+                        </a>
+                        <a href="#" class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-file-pdf"></i>Simpan ke PDF
+                        </a>
+                    </div>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
+                                        ID
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Kategori</th>
+                                        Kategori
+                                    </th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Produk</th>
+                                        Produk
+                                    </th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Terakhir Diubah</th>
-                                    <th class="text-secondary opacity-7"></th>
+                                        Terakhir Diubah
+                                    </th>
+                                    <th class="text-secondary opacity-7 text-center"></th>
                                 </tr>
                             </thead>
-                            <!-- <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex px-2 py-1">
-                                                    <div>
-                                                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3"
-                                                            alt="user1">
-                                                    </div>
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">John Michael</h6>
-                                                        <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0">Manager</p>
-                                                <p class="text-xs text-secondary mb-0">Organization</p>
-                                            </td>
-                                            <td class="align-middle text-center text-sm">
-                                                <span class="badge badge-sm bg-gradient-success">Online</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                                            </td>
-                                            <td class="align-middle">
-                                                <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                    data-toggle="tooltip" data-original-title="Edit user">
-                                                    Edit
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    </tbody> -->
                             <tbody>
                                 @php
                                     $i = 1;
@@ -63,18 +52,29 @@
 
                                 @foreach ($categories as $category)
                                     <tr>
-                                        <td>
+                                        <td class="text-center">
                                             <div class="d-flex px-2 py-1 flex-column justify-content-center">
-                                                <h6>{{ $i++ }}</h6>
+                                                <span class="text-secondary font-weight-bold">{{ $category->id }}</span>
                                             </div>
-                                            <!-- PR: ALIGN CENTER FOR THIS COLUMN -->
                                         </td>
-                                        <td class="font-weight-bold mb-0">
-                                            {{ $category->name }}
+                                        <td>
+                                            <span class="text-secondary font-weight-bold">{{ $category->name }}</span>
                                         </td>
-                                        <td>6</td>
-                                        <td>{{ $category->updated_at }}</td>
-                                        <td>Edit</td>
+                                        <td class="text-center">
+                                            <span class="text-secondary font-weight-bold">6</span>
+                                        </td>
+                                        <td class="text-center">
+                                            <span
+                                                class="text-secondary font-weight-bold">{{ $category->updated_at->format('d/m/Y H:i:s') }}
+                                            </span>
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="{{ route('categories.edit', $category->id) }}"
+                                                class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
+                                                data-original-title="Edit category">
+                                                Edit
+                                            </a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/img/apple-icon.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('assets/img/favicon.png') }}">
     <title>
         Argon Dashboard 3 by Creative Tim
     </title>
@@ -14,10 +14,12 @@
     <!-- Nucleo Icons -->
     <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-icons.css" rel="stylesheet" />
     <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Sweet Alert -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
     <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link id="stylesheet" href="{{ asset('assets/css/all.min.css') }}" rel="stylesheet" />
     <!-- CSS Files -->
-    <link id="pagestyle" href="../assets/css/argon-dashboard.css?v=2.1.0" rel="stylesheet" />
+    <link id="pagestyle" href="{{ asset('assets/css/argon-dashboard.css') }}" rel="stylesheet" />
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
@@ -31,8 +33,8 @@
                     aria-hidden="true" id="iconSidenav"></i>
                 <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/argon-dashboard/pages/dashboard.html "
                     target="_blank">
-                    <img src="../assets/img/logo-ct-dark.png" width="26px" height="26px" class="navbar-brand-img h-100"
-                        alt="main_logo">
+                    <img src="{{ asset('assets/img/logo-ct-dark.png') }}" width="26px" height="26px"
+                        class="navbar-brand-img h-100" alt="main_logo">
                     <span class="ms-1 font-weight-bold">Creative Tim</span>
                 </a>
             </div>
@@ -118,7 +120,7 @@
             </div>
             <div class="sidenav-footer mx-3 ">
                 <div class="card card-plain shadow-none" id="sidenavCard">
-                    <img class="w-50 mx-auto" src="../assets/img/illustrations/icon-documentation.svg"
+                    <img class="w-50 mx-auto" src="{{ asset('assets/img/illustrations/icon-documentation.svg') }}"
                         alt="sidebar_illustration">
                     <div class="card-body text-center p-3 w-100 pt-0">
                         <div class="docs-info">
@@ -134,7 +136,8 @@
                     type="button">Upgrade to pro</a>
             </div>
         </aside>
-        <main class="main-content position-relative border-radius-lg ">
+        <main
+            class="main-content position-relative border-radius-lg max-height-vh-100 h-100 min-vh-100 d-flex flex-column">
             <!-- Navbar -->
             <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur"
                 data-scroll="false">
@@ -160,7 +163,7 @@
                                 <form action="{{ route('auth.logout') }}" method="POST">
                                     @csrf
                                     <button type="submit" class="nav-link text-white font-weight-bold px-0">
-                                        <i class="fa fa-user me-sm-1"></i>
+                                        <i class="fa-solid fa-right-from-bracket"></i>
                                         <span class="d-sm-inline d-none">Logout</span>
                                     </button>
                                 </form>
@@ -190,7 +193,8 @@
                                         <a class="dropdown-item border-radius-md" href="javascript:;">
                                             <div class="d-flex py-1">
                                                 <div class="my-auto">
-                                                    <img src="../assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
+                                                    <img src="{{ asset('assets/img/team-2.jpg') }}"
+                                                        class="avatar avatar-sm  me-3 ">
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="text-sm font-weight-normal mb-1">
@@ -208,7 +212,7 @@
                                         <a class="dropdown-item border-radius-md" href="javascript:;">
                                             <div class="d-flex py-1">
                                                 <div class="my-auto">
-                                                    <img src="../assets/img/small-logos/logo-spotify.svg"
+                                                    <img src="{{ asset('assets/img/small-logos/logo-spotify.svg') }}"
                                                         class="avatar avatar-sm bg-gradient-dark  me-3 ">
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
@@ -268,49 +272,48 @@
                 </div>
             </nav>
             <!-- End Navbar -->
-            <div class="container-fluid py-4">
+            <div class="container-fluid py-4 flex-grow-1">
                 @yield('content')
-                <footer class="footer pt-3">
-                    <div class="container-fluid">
-                        <div class="row align-items-center justify-content-lg-between">
-                            <div class="col-lg-6 mb-lg-0 mb-4">
-                                <div class="copyright text-center text-sm text-muted text-lg-start">
-                                    ©
-                                    <script>
-                                        document.write(new Date().getFullYear())
-                                    </script>,
-                                    made with <i class="fa fa-heart"></i> by
-                                    <a href="https://www.creative-tim.com" class="font-weight-bold"
-                                        target="_blank">Creative
-                                        Tim</a>
-                                    for a better web.
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                                    <li class="nav-item">
-                                        <a href="https://www.creative-tim.com" class="nav-link text-muted"
-                                            target="_blank">Creative
-                                            Tim</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted"
-                                            target="_blank">About Us</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="https://www.creative-tim.com/blog" class="nav-link text-muted"
-                                            target="_blank">Blog</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted"
-                                            target="_blank">License</a>
-                                    </li>
-                                </ul>
+            </div>
+            <footer class="footer pt-3 mx-4 mb-3">
+                <div class="container-fluid my-auto">
+                    <div class="row align-items-center justify-content-lg-between">
+                        <div class="col-lg-6 mb-lg-0 mb-4">
+                            <div class="copyright text-center text-sm text-muted text-lg-start">
+                                ©
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script>,
+                                made with <i class="fa fa-heart"></i> by
+                                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative
+                                    Tim</a>
+                                for a better web.
                             </div>
                         </div>
+                        <div class="col-lg-6">
+                            <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                                <li class="nav-item">
+                                    <a href="https://www.creative-tim.com" class="nav-link text-muted"
+                                        target="_blank">Creative
+                                        Tim</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted"
+                                        target="_blank">About Us</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="https://www.creative-tim.com/blog" class="nav-link text-muted"
+                                        target="_blank">Blog</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted"
+                                        target="_blank">License</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </footer>
-            </div>
+                </div>
+            </footer>
         </main>
     </div>
     <div class="fixed-plugin">
@@ -403,11 +406,11 @@
         </div>
     </div>
     <!--   Core JS Files   -->
-    <script src="../assets/js/core/popper.min.js"></script>
-    <script src="../assets/js/core/bootstrap.min.js"></script>
-    <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-    <script src="../assets/js/plugins/chartjs.min.js"></script>
+    <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/chartjs.min.js') }}"></script>
     <script>
         var ctx1 = document.getElementById("chart-line").getContext("2d");
 
@@ -503,7 +506,33 @@
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="../assets/js/argon-dashboard.min.js?v=2.1.0"></script>
+    <script src="{{ asset('assets/js/argon-dashboard.min.js') }}"></script>
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.querySelectorAll('.form-delete').forEach(form => {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const currentForm = this;
+
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Kategori ini akan dihapus secara permanen!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#f5365c',
+                    cancelButtonColor: '#adb5bd',
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        currentForm.submit();
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

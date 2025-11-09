@@ -109,7 +109,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <form role="form" class="user" method="POST" action="{{ route('auth.register') }}">
+                            <form role="form" class="user" method="POST" action="{{ route('register') }}">
                                 @csrf
                                 <div class="mb-3">
                                     <input type="text" class="form-control" name="name" placeholder="Name"
