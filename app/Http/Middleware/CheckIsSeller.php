@@ -4,10 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
-class CheckIsAdmin
+class CheckIsSeller
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,10 @@ class CheckIsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->isAdmin()) {
+        if (Auth::check() && Auth::user()->isSeller()) {
             return $next($request);
         }
 
-        abort(403, 'Akses ditolak. Hanya untuk Admin.');
+        abort(403, 'Akses ditolak. Hanya untuk Seller.');
     }
 }

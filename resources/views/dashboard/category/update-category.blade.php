@@ -1,4 +1,9 @@
 @extends('layout.main')
+@section('title', 'Edit Kategori')
+@section('breadcrumb-title', 'Edit Kategori')
+@section('breadcrumb-links')
+    <li class="breadcrumb-item text-sm text-white active" aria-current="page">Edit Kategori</li>
+@endsection
 @section('content')
     <div class="row mt-4">
         <div class="col-lg-12 mb-lg-0 mb-4">
@@ -39,7 +44,7 @@
                     </form>
                     <div class="d-flex justify-content-end mt-4">
 
-                        <form action="{{ route('categories.destroy', $category->id) }}" method="POST" class="form-delete">
+                        <form action="{{ route('categories.destroy', $category->id) }}" method="POST" class="form-delete" data-type="category">
                             @csrf
                             @method('DELETE')
 

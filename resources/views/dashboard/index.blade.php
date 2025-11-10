@@ -1,5 +1,9 @@
 @extends('layout.main')
-
+@section('title', 'Dashboard')
+@section('breadcrumb-title', 'Dashboard')
+@section('breadcrumb-links')
+    <li class="breadcrumb-item text-sm text-white active" aria-current="page">Dashboard</li>
+@endsection
 @section('content')
 
   <div class="row">

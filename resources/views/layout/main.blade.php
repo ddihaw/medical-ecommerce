@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/img/apple-icon.png') }}">
     <link rel="icon" type="image/png" href="{{ asset('assets/img/favicon.png') }}">
-    <title>
-        Argon Dashboard 3 by Creative Tim
-    </title>
+    <title>@hasSection('title')@yield('title') | Uji Kompetensi @endif</title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <!-- Nucleo Icons -->
@@ -144,11 +142,17 @@
                 <div class="container-fluid py-1 px-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white"
-                                    href="javascript:;">Pages</a></li>
-                            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Dashboard</li>
+
+                            <li class="breadcrumb-item text-sm">
+                                <a class="opacity-5 text-white" href="{{ route('dashboard.index') }}">Home</a>
+                            </li>
+
+                            @yield('breadcrumb-links')
+
                         </ol>
-                        <h6 class="font-weight-bolder text-white mb-0">Dashboard</h6>
+                        <h6 class="font-weight-bolder text-white mb-0">
+                            @yield('breadcrumb-title', 'Dashboard')
+                        </h6>
                     </nav>
                     <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                         <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -177,9 +181,11 @@
                                     </div>
                                 </a>
                             </li>
+                            <!--
                             <li class="nav-item px-3 d-flex align-items-center">
                                 <a href="javascript:;" class="nav-link text-white p-0">
-                                    <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
+                                    <i
+                                        class="fa-notdog fa-solid fa-cart-shopping fixed-plugin-button-nav cursor-pointer"></i>
                                 </a>
                             </li>
                             <li class="nav-item dropdown pe-2 d-flex align-items-center">
@@ -265,8 +271,9 @@
                                             </div>
                                         </a>
                                     </li>
-                                </ul>
-                            </li>
+                                -->
+                        </ul>
+                        </li>
                         </ul>
                     </div>
                 </div>
@@ -318,7 +325,7 @@
     </div>
     <div class="fixed-plugin">
         <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
-            <i class="fa fa-cog py-2"> </i>
+            <i class="fa-notdog fa-solid fa-cart-shopping py-2"></i>
         </a>
         <div class="card shadow-lg">
             <div class="card-header pb-0 pt-3 ">
@@ -516,9 +523,16 @@
 
                 const currentForm = this;
 
+                // 1. Ambil nama item dari 'data-type' di HTML
+                // Jika tidak ada, gunakan 'Item' sebagai fallback
+                const itemType = currentForm.dataset.type || 'Item';
+
+                // 2. Buat pesan dinamis
+                const confirmationText = `${itemType} ini akan dihapus secara permanen!`;
+
                 Swal.fire({
                     title: 'Apakah Anda yakin?',
-                    text: "Kategori ini akan dihapus secara permanen!",
+                    text: confirmationText, // <-- Gunakan pesan dinamis di sini
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#f5365c',

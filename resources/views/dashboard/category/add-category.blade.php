@@ -1,5 +1,9 @@
 @extends('layout.main')
-
+@section('title', 'Daftar Kategori')
+@section('breadcrumb-title', 'Tambah Kategori')
+@section('breadcrumb-links')
+    <li class="breadcrumb-item text-sm text-white active" aria-current="page">Tambah Kategori</li>
+@endsection
 @section('content')
     <div class="row mt-4">
         <div class="col-lg-12 mb-lg-0 mb-4">
